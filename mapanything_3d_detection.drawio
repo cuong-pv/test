@@ -1,0 +1,138 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6">
+  <diagram name="3D Detection Extension" id="det1">
+    <mxGraphModel dx="1543" dy="1009" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=20;fontStyle=1;align=center;" value="3D Object Detection on Frozen MapAnything" vertex="1">
+          <mxGeometry height="40" width="500" x="200" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="frozen_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#b85450;strokeWidth=2;dashed=1;arcSize=5;" value="" vertex="1">
+          <mxGeometry height="380" width="800" x="50" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="frozen_label" parent="1" style="text;html=1;fontSize=12;fontStyle=2;align=left;" value="&lt;font color=&#39;#b85450&#39;&gt;&lt;b&gt;FROZEN&lt;/b&gt; MapAnything (no gradient)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="300" x="70" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="frozen_badge" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b85450;strokeColor=none;fontSize=10;" value="&lt;font color=&#39;white&#39;&gt;&lt;b&gt;FROZEN&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="22" width="70" x="750" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="images" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="&lt;b&gt;Multi-view images&lt;/b&gt;" vertex="1">
+          <mxGeometry height="45" width="200" x="340" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="transformer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=13;" value="&lt;b&gt;DINOv2 encoder + transformer layers&lt;/b&gt;" vertex="1">
+          <mxGeometry height="45" width="480" x="200" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="images" style="edgeStyle=orthogonalEdgeStyle;" target="transformer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="feat_tokens" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" value="&lt;b&gt;Feature tokens F&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;1&#39;&gt;B × H × W × D&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="240" x="120" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="geom_heads" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" value="&lt;b&gt;Factored geometry heads&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;1&#39;&gt;depth, rays, pose, scale&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="240" x="520" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="transformer" style="edgeStyle=orthogonalEdgeStyle;" target="feat_tokens">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="transformer" style="edgeStyle=orthogonalEdgeStyle;" target="geom_heads">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pts3d" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" value="&lt;b&gt;pts3d&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;1&#39;&gt;H×W×3&lt;/font&gt;" vertex="1">
+          <mxGeometry height="45" width="110" x="520" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="conf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" value="&lt;b&gt;Confidence&lt;/b&gt;" vertex="1">
+          <mxGeometry height="45" width="110" x="660" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="geom_heads" style="edgeStyle=orthogonalEdgeStyle;" target="pts3d">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="geom_heads" style="edgeStyle=orthogonalEdgeStyle;" target="conf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="train_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#82b366;strokeWidth=2;dashed=1;arcSize=5;" value="" vertex="1">
+          <mxGeometry height="600" width="800" x="50" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="train_label" parent="1" style="text;html=1;fontSize=12;fontStyle=2;align=left;" value="&lt;font color=&#39;#82b366&#39;&gt;&lt;b&gt;TRAINABLE&lt;/b&gt; 3D detection head&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="300" x="70" y="528" as="geometry" />
+        </mxCell>
+        <mxCell id="train_badge" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#82b366;strokeColor=none;fontSize=10;" value="&lt;font color=&#39;white&#39;&gt;&lt;b&gt;TRAINABLE&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="22" width="90" x="730" y="528" as="geometry" />
+        </mxCell>
+        <mxCell id="e_feat" edge="1" parent="1" source="feat_tokens" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9673a6;strokeWidth=2.5;html=1;" target="lifting" value="features">
+          <mxGeometry relative="1" x="0.0032" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_geom" edge="1" parent="1" source="pts3d" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;strokeWidth=2.5;" target="lifting" value="Geometry&#xa;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_conf" edge="1" parent="1" source="conf" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;strokeWidth=1.5;dashed=1;" target="lifting" value="weights">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="715" y="498" />
+              <mxPoint x="440" y="498" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lifting" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b6d7a8;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;3D feature lifting&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;1&#39;&gt;Unproject F using pts3d coords → BEV grid or voxels, weighted by confidence&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="580" x="150" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="encoder" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b6d7a8;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;3D / BEV encoder&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;1&#39;&gt;Sparse 3D conv or 2D BEV backbone (FPN) over lifted features&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="580" x="150" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="lifting" style="edgeStyle=orthogonalEdgeStyle;" target="encoder">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="det_trans" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b6d7a8;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Detection transformer (DETR-style)&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;1&#39;&gt;Learnable object queries cross-attend to 3D/BEV features&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="580" x="150" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="encoder" style="edgeStyle=orthogonalEdgeStyle;" target="det_trans">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pred_label" parent="1" style="text;html=1;fontSize=12;fontStyle=2;fontColor=#666666;align=left;" value="Per-query prediction heads" vertex="1">
+          <mxGeometry height="20" width="200" x="120" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="box_head" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="&lt;b&gt;3D box&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;1&#39;&gt;xyz, lwh, yaw&lt;/font&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="100" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_head" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="&lt;b&gt;Class&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;1&#39;&gt;Softmax logits&lt;/font&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="270" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="vel_head" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="&lt;b&gt;Velocity&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;1&#39;&gt;vx, vy (opt.)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="440" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="score_head" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="&lt;b&gt;Score&lt;/b&gt;&lt;br&gt;&lt;font size=&#39;1&#39;&gt;Objectness&lt;/font&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="610" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="det_trans" style="edgeStyle=orthogonalEdgeStyle;" target="box_head">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="det_trans" style="edgeStyle=orthogonalEdgeStyle;" target="cls_head">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="det_trans" style="edgeStyle=orthogonalEdgeStyle;" target="vel_head">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="det_trans" style="edgeStyle=orthogonalEdgeStyle;" target="score_head">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="loss" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;Hungarian matching + focal + L1 + GIoU loss&lt;/b&gt;" vertex="1">
+          <mxGeometry height="50" width="420" x="230" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="box_head" style="edgeStyle=orthogonalEdgeStyle;" target="loss">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="cls_head" style="edgeStyle=orthogonalEdgeStyle;" target="loss">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="vel_head" style="edgeStyle=orthogonalEdgeStyle;" target="loss">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="score_head" style="edgeStyle=orthogonalEdgeStyle;" target="loss">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
